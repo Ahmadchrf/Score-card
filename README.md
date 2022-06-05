@@ -2,6 +2,12 @@
 
 L'objectif de ce sujet est de mettre en avant une méthodologie de construction d'une grille de score sur une problématique de risque de crédit à la consommation, et de proposer des méthodes ensemblistes challengeant notre grille de score classique et en déduire une interprétabilité avec la méthode de la valeur de Shapley.
 
+# Données 
+
+La base de données traitées concerne des données issues d'une banque octroyant des crédits à la consommation. En effet ces crédits concernent des prêts liés à un besoin de financement dans l'éducation, pour des fins médicales, professionnel, personnel en tout genre, rachat de crédit ou encore pour des travaux mineurs personnels. En effet les montants de ces prêts n'excèdent que rarement les quelques dizaines de milliers d'euros. La base de données est constituée de 32 581 observations et de 12 variables. La base contient des informations propres aux contrats type montant du prêt, taux d'intérêt associé, objet du prêt, ou encore la durée écoulée depuis le début du prêt. Elle contient aussi des informations propres aux clients comme l'âge du client, son revenu, sa situation immobilière, sa durée expérience ou encore une note comportementale associée. La variable à modéliser est le défaut du prêt ou non, la variable vaut 1 si le client a fait au moins une fois défaut et 0 sinon.
+
+La base est issue de Kaggle **Lien du challenge : https://www.kaggle.com/datasets/laotse/credit-risk-dataset?resource=download" 
+
 # Etapes
 
 * Application de plusieurs étapes de nettoyage et mise en forme des données (Label encoding, problématique de traitement des données manquantes et outliers).
