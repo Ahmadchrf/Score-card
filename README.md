@@ -1,4 +1,4 @@
-# Construction d'une grille de score
+# Construction d'une grille de score - Domaine du crédit à la consommation
 
 L'objectif de ce sujet est de mettre en avant une méthodologie de construction d'une grille de score sur une problématique de risque de crédit à la consommation, et de proposer des méthodes ensemblistes challengeant notre grille de score classique et en déduire une interprétabilité avec la méthode de la valeur de Shapley.
 
