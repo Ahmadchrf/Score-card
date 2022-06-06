@@ -1,4 +1,4 @@
-from librairies_nexialog import *
+from librairies_score import *
 
 # Cette fonction nous donne une nouvelle base de données appliquant le label encoding aux variables qualitatives encore sous le format string/object
 
