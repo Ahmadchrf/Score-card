@@ -21,6 +21,6 @@ La base est issue de Kaggle **Lien du challenge : https://www.kaggle.com/dataset
 
 Le script **programme_scorecard.ipynb** permet de rendre compte de l'entière réalisation du projet
 
-Le script **function_score.py** contient toutes les fonctions utiles à la bonne exécution du scirpt **programme_scorecard.ipynb**
+Le script **function_score.py** contient toutes les fonctions utiles à la bonne exécution du script **programme_scorecard.ipynb**
 
 Le script **librairies_score.py** permet l'import des librairies utile à la bonne exécution des fonctions présentes dans le script **function_score.py** et donc indirectement au script **programme_scorecard.ipynb**
