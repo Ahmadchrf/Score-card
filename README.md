@@ -11,8 +11,8 @@ La base est issue de Kaggle **Lien du challenge : https://www.kaggle.com/dataset
 # Etapes
 
 * Application de plusieurs étapes de nettoyage et mise en forme des données (Label encoding, problématique de traitement des données manquantes et outliers).
-* Création de variable (variable macroéconomique rendant de l'environnement économique lors de l'octroi) .
-* Discrétisatoion des variables quantitatives pour la construction de la grille et regroupement de modalités des variables qualitatives.
+* Création de variable (variable macroéconomique rendant de l'environnement économique lors de l'octroi).
+* Discrétisation des variables quantitatives pour la construction de la grille et regroupement de modalités des variables qualitatives.
 * Prétraitement pour la modélisation : Classement des variables explicatives avec notre variable cible en fonction de la corrélation, avant de réaliser une régression logistique en step by step, visant à minimiser le critère d'information BIC et à omettre toute corrélation entre variable explicative selon la stat du V de Cramer.
 * Modélisation avec un modèle classique : régression logistique, des modèles challenger : Random Forest et Gradient Boosting, et interprétabilités de ces méthodes ensemblistes avec la Shapley Value.
 
