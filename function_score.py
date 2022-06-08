@@ -1,12 +1,11 @@
-from librairies_score import *
+from librairies_nexialog import *
 
 # Cette fonction nous donne une nouvelle base de données appliquant le label encoding aux variables qualitatives encore sous le format string/object
 
 def label_encoding(data,target):
-    """
-    * data  : La base de données ;
-    * target : La variable cible.
-    """
+
+        # data  : La base de données ;
+        # target : La variable cible.
     
     var_disc = data.select_dtypes(include=[np.object]).columns
     
@@ -22,21 +21,20 @@ def label_encoding(data,target):
         lab = sorted(dict_label,key=dict_label.get,reverse = True)
         dict_fin = dict(zip(lab,reversed(range(len(lab)))))
         
-        df = data.replace({j: dict_fin})
+        data = data.replace({j: dict_fin})
         
-    return df
+    return data
 
 # Cette fonction permet de fournir selon la discrétisation choisit le graphique de stabilité par rapport à la target dans le temps
    
 def stabilty_def(data,var_disc, var_time,var_count,target,t):
     
-        """ * data : La base de données ;
-        * var_disc :  la variable qui vient d'être discrétiser ;
-        * var_time : la variable représentant la temporalité de notre base ;
-        * var_count : une variable unique attribuée à chaque ligne de notre base (typiquement un id_contrat ou même l'index de la base) ;
-        * taregt : la variable cible ;
-        t : la fréquence temporelle.
-    """
+        # data : La base de données ;
+        # var_disc :  la variable qui vient d'être discrétiser ;
+        # var_time : la variable représentant la temporalité de notre base ;
+        # var_count : une variable unique attribuée à chaque ligne de notre base (typiquement un id_contrat ou même l'index de la base) ;
+        # target : la variable cible ;
+        # t : la fréquence temporelle.
         
     name_var = list(pd.DataFrame(data[var_disc].value_counts()).index)
     name_var = sorted(name_var)
@@ -100,14 +98,15 @@ def stabilty_def(data,var_disc, var_time,var_count,target,t):
 
 # Cette fonction permet de fournir selon la discrétisation choisit le graphique de stabilité en répartition dans le temps
 
+
 def stabilty_repartition(data,var_disc,var_time,var_count,t):
     
-        """ * data : La base de données ;
-        * var_disc :  la variable qui vient d'être discrétiser ;
-        * var_time : la variable représentant la temporalité de notre base ;
-        * var_count : une variable unique attribuée à chaque ligne de notre base (typiquement un id_contrat ou même l'index de la base) ;
-        t : la fréquence temporelle.
-    """
+    # data : La base de données ;
+    # var_disc :  la variable qui vient d'être discrétiser ;
+    # var_time : la variable représentant la temporalité de notre base ;
+    # var_count : une variable unique attribuée à chaque ligne de notre base (typiquement un id_contrat ou même l'index de la base) ;
+    # t : la fréquence temporelle.
+    
 
     df_base = data.groupby([var_time]).agg({var_count:"count"})
     
@@ -167,10 +166,10 @@ def stabilty_repartition(data,var_disc,var_time,var_count,t):
     
 def find_bin(data,var_names,target):
 
-    """ * data : la base de données ;
-        * var_names : le nom de la variable que l'on cherche à discrétiser ;
-        * target : la variable cible.
-    """
+    # data : la base de données ;
+    # var_names : le nom de la variable que l'on cherche à discrétiser ;
+    # target : la variable cible.
+    
     a = 0
     liste = []
     for i in range(19):
@@ -199,6 +198,7 @@ def find_bin(data,var_names,target):
     return data_fin
 
 # Ce test permet de rendre compte du test du Khi deux 
+
 def khi_deux(df_qual,target,alpha):
     
     liste_stat = []
@@ -218,7 +218,9 @@ def khi_deux(df_qual,target,alpha):
 # Ces deux fonctions permettent de rendre compte de la stats de V de cramer par rapport à la target 
 
 def cramers_v(x, y):
-    """ Cette fonction permet à cramerV_join de fonctionner"""
+    
+    # Cette fonction permet à cramerV_join de fonctionner
+    
     confusion_matrix = pd.crosstab(x,y)
     chi2 = ss.chi2_contingency(confusion_matrix)[0]
     n = confusion_matrix.sum().sum()
@@ -230,8 +232,9 @@ def cramers_v(x, y):
     return np.sqrt(phi2corr/min((kcorr-1),(rcorr-1)))
 
 def cramerV_join(df_qual,target):
-    """ * df_qual : la base de donées composée uniquement des variables qualitatives ;
-        * target  : la variable cible """
+    
+    # df_qual : la base de donées composée uniquement des variables qualitatives ;
+    # target  : la variable cible
     List_name = []
     Data=pd.DataFrame()
 
@@ -258,8 +261,8 @@ def cramerV_join(df_qual,target):
 
 def step_by_step_log(data,target):
     
-    """ * data : C'est la base après tout le data processing réalisé ;
-        * target : La variable cible"""
+    # data : C'est la base après tout le data processing réalisé ;
+    # target : La variable cible
     
     df_khi_deux_tar = khi_deux(data,target,0.05)
     
@@ -298,12 +301,14 @@ def step_by_step_log(data,target):
 
 # Fonction de construction de la grille de score finale avec les valeurs associés à chaque modalité de nos variables dsicrètes.
 
-def scorecard(data,var_keep,target,note_max = 1000):
+def scorecard(data,target,note_max = 1000):
     
-    """ * data c'est la base utilisée dans la construction de la grille ;
-        * var_keep c'est les colonnes de la base sans la target ;
-        * target : la variable cible ;
-        * Sur quelle note on souhaite évaluer nos données. """
+    # data : c'est la base utilisée dans la construction de la grille ;
+    # var_keep : c'est les colonnes de la base sans la target ;
+    # target : la variable cible ;
+    # note_max : sur quelle note on souhaite évaluer nos données.
+    
+    var_keep = data.drop(columns = target).columns
   
     X = data[var_keep]
     y = data[target]
@@ -378,13 +383,15 @@ def scorecard(data,var_keep,target,note_max = 1000):
 
 # Fonction de construction du résumé obtenu dans la grille de scoer vaec les taux de défaut par modalité et les répartitions
 
-def resume_score(data,var_keep,target):
+def resume_score(data,target):
     
-    """ * data c'est la base utilisée dans la construction de la grille ;
-        * var_keep c'est les colonnes de la base sans la target ;
-        * target : la variable cible. """
+    # data c'est la base utilisée dans la construction de la grille ;
+    # var_keep c'est les colonnes de la base sans la target ;
+    # target : la variable cible.
     
-    dt = scorecard(data,var_keep,target)
+    var_keep = data.drop(columns = target).columns
+    
+    dt = scorecard(data,target)
 
     l_value = [int(i) for i in list(map(lambda x : x[-1],list(dt.index)))]
     dt["Value"] = l_value
@@ -417,7 +424,7 @@ def resume_score(data,var_keep,target):
     
     
     def repart_tab(var):
-        return pd.DataFrame(df3[var].value_counts(normalize=True))
+        return pd.DataFrame(data[var].value_counts(normalize=True))
 
     l_fin_r = list(map(repart_tab,list_var_fin))
 
@@ -440,3 +447,33 @@ def resume_score(data,var_keep,target):
     dt["correspondance repartition"] = flat_indexs_r
     
     return dt
+
+# Fonction permettant d'attribuer les notes directement dans la base sous la forme d'une variable note_final nous permettant de construire les chr
+
+def att_note(data,target):
+    
+    # data : la base de données
+    # target : la variable cible
+ 
+    # var_keep = data.drop(columns = target).columns
+    
+    dt = resume_score(data,target)
+
+    #col_ = col
+    #col_.remove(target)
+    #col_
+    
+    col = list(data.columns)
+    col.remove(target)
+
+    list_note  = list(dt["Note"])
+    dict_score_fin = dict(zip(dt.index,list_note))
+    for i in col :
+        data[i + "_note"] = str(i) +"_" + data[i].astype(str)
+    data = data.replace(dict_score_fin)
+    var_note = [x for x in data.columns if x.endswith("_note")]
+    data["note_final"] = data[var_note].sum(axis=1)
+
+    data.drop(columns = var_note,inplace=True)
+    
+    return data
